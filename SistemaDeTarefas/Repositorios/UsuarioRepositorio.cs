@@ -1,4 +1,5 @@
-﻿using SistemaDeTarefas.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using SistemaDeTarefas.Data;
 using SistemaDeTarefas.Models;
 using SistemaDeTarefas.Repositorios.Interfaces;
 
@@ -13,29 +14,48 @@ namespace SistemaDeTarefas.Repositorios
             _dbContext = dBContext;
         }
 
-        public Task<UsuarioModel> AdicionarUsuario(UsuarioModel usuario)
+        public async Task<UsuarioModel> AdicionarUsuario(UsuarioModel usuario)
         {
-            throw new NotImplementedException();
+            await _dbContext.Usuarios.AddAsync(usuario);
+            await _dbContext.SaveChangesAsync();
+
+            return usuario;
         }
 
-        public Task<UsuarioModel> AtualizarUsuario(UsuarioModel usuario, int id)
+        public async Task<UsuarioModel> AtualizarUsuario(UsuarioModel usuario, int id)
         {
-            throw new NotImplementedException();
+            UsuarioModel usuarioId = await BuscarPorId(id);
+            if (usuarioId is null)
+                throw new Exception($"Usuário com identificador: {id}, não foi encontrado!");
+
+            usuarioId.Nome = usuario.Nome;
+            usuarioId.Email = usuario.Email;
+
+            await _dbContext.Usuarios.AddAsync(usuarioId);
+            await _dbContext.SaveChangesAsync();
+
+            return usuarioId;
         }
 
-        public Task<UsuarioModel> BuscarPorId(int id)
+        public async Task<UsuarioModel> BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public Task<List<UsuarioModel>> BuscarTodosUsuarios()
+        public async Task<List<UsuarioModel>> BuscarTodosUsuarios()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Usuarios.ToListAsync();
         }
 
-        public Task<bool> RemoverUsuario(int id)
+        public async Task<bool> RemoverUsuario(int id)
         {
-            throw new NotImplementedException();
+            UsuarioModel usuarioId = await BuscarPorId(id);
+            if (usuarioId is null)
+                throw new Exception($"Usuário com identificador: {id}, não foi encontrado!");
+
+            _dbContext.Usuarios.Remove(usuarioId);
+            await _dbContext.SaveChangesAsync();
+            return true;
         }
     }
 }
