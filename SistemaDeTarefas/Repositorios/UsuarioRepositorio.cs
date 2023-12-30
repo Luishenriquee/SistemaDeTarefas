@@ -31,7 +31,7 @@ namespace SistemaDeTarefas.Repositorios
             usuarioId.Nome = usuario.Nome;
             usuarioId.Email = usuario.Email;
 
-            await _dbContext.Usuarios.AddAsync(usuarioId);
+            _dbContext.Usuarios.Update(usuarioId);
             await _dbContext.SaveChangesAsync();
 
             return usuarioId;
