@@ -5,6 +5,8 @@ namespace SistemaDeTarefas.Controllers
 {
     public class TarefaController : ControllerBase
     {
+        public TarefaController() { }
+
         [HttpGet]
         public async Task<ActionResult<List<TarefaModel>>> BuscarTarefas()
         {
