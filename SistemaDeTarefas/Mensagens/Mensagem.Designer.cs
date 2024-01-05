@@ -19,7 +19,7 @@ namespace SistemaDeTarefas.Mensagens {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Mensagem {
@@ -57,6 +57,24 @@ namespace SistemaDeTarefas.Mensagens {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tarefa com identificador: {0} não foi encontrado!.
+        /// </summary>
+        public static string MSG0001 {
+            get {
+                return ResourceManager.GetString("MSG0001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Usuário com identificador: {0} não foi encontrado!.
+        /// </summary>
+        public static string MSG0002 {
+            get {
+                return ResourceManager.GetString("MSG0002", resourceCulture);
             }
         }
     }

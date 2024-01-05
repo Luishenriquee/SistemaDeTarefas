@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SistemaDeTarefas.Data;
+using SistemaDeTarefas.Mensagens;
 using SistemaDeTarefas.Models;
 using SistemaDeTarefas.Repositorios.Interfaces;
 
@@ -26,7 +27,7 @@ namespace SistemaDeTarefas.Repositorios
         {
             TarefaModel tarefaId = await BuscarPorId(id);
             if (tarefaId is null)
-                throw new Exception($"Tarefa com identificador: {id}, não foi encontrado!");
+                throw new Exception(string.Format(Mensagem.MSG0001, id));
 
             tarefaId.Name = tarefa.Name;
             tarefaId.Status = tarefa.Status;
@@ -58,7 +59,7 @@ namespace SistemaDeTarefas.Repositorios
         {
             TarefaModel tarefaId = await BuscarPorId(id);
             if (tarefaId is null)
-                throw new Exception($"Tarefa com identificador: {id}, não foi encontrado!");
+                throw new Exception(string.Format(Mensagem.MSG0001, id));
 
             _dbContext.Tarefas.Remove(tarefaId);
             await _dbContext.SaveChangesAsync();

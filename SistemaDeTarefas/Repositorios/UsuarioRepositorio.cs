@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SistemaDeTarefas.Data;
+using SistemaDeTarefas.Mensagens;
 using SistemaDeTarefas.Models;
 using SistemaDeTarefas.Repositorios.Interfaces;
 
@@ -26,7 +27,7 @@ namespace SistemaDeTarefas.Repositorios
         {
             UsuarioModel usuarioId = await BuscarPorId(id);
             if (usuarioId is null)
-                throw new Exception($"Usuário com identificador: {id}, não foi encontrado!");
+                throw new Exception(string.Format(Mensagem.MSG0002, id));
 
             usuarioId.Nome = usuario.Nome;
             usuarioId.Email = usuario.Email;
@@ -51,7 +52,7 @@ namespace SistemaDeTarefas.Repositorios
         {
             UsuarioModel usuarioId = await BuscarPorId(id);
             if (usuarioId is null)
-                throw new Exception($"Usuário com identificador: {id}, não foi encontrado!");
+                throw new Exception(string.Format(Mensagem.MSG0002, id));
 
             _dbContext.Usuarios.Remove(usuarioId);
             await _dbContext.SaveChangesAsync();
